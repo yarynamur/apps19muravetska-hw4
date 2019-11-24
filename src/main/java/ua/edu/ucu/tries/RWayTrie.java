@@ -1,8 +1,5 @@
 package ua.edu.ucu.tries;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RWayTrie implements Trie {
     private static int R = 256;
     private Node root;
