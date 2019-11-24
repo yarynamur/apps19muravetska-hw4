@@ -42,7 +42,10 @@ public class PrefixMatches {
 
     public Iterable<String> wordsWithPrefix(String pref, int k) {
         Iterable<String> old_q = trie.wordsWithPrefix(pref);
-        int new_size = Math.min(k, trie.size())+1;
+        int new_size = Math.min(k, trie.size());
+        if (trie.size()>k){
+            new_size++;
+        }
         List<String> list = new ArrayList();
         for (String s: old_q) {
             list.add(s);
