@@ -49,7 +49,7 @@ public class RWayTrie implements Trie {
 
     @Override
     public boolean contains(String word) {
-        if (get(word).equals(null)){
+        if (get(word) == null){
             return false;
         }
         return true;
@@ -58,7 +58,7 @@ public class RWayTrie implements Trie {
     @Override
     public boolean delete(String word) {
         root = delete(root, word, 0);
-        if (root.equals(null)){
+        if (root == null){
             return false;
         }
         return true;
