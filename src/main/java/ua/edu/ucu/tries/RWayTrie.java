@@ -5,7 +5,6 @@ import java.util.List;
 
 public class RWayTrie implements Trie {
     private static int R = 256;
-    private int size;
     private Node root;
     private static class Node
     {
@@ -16,7 +15,6 @@ public class RWayTrie implements Trie {
     @Override
     public void add(Tuple t) {
         root = add(root, t, 0);
-        size++;
     }
 
     private Node add(Node x, Tuple t, int d) {
@@ -73,14 +71,16 @@ public class RWayTrie implements Trie {
         }
         if (d == word.length())
             x.val = null;
-        else
-        {
+        else {
             char c = word.charAt(d);
             x.next[c] = delete(x.next[c], word, d+1);
         }
-        if (x.val != null) return x;
-        for (char c = 0; c < R; c++)
+        if (x.val != null) {
+            return x;
+        }
+        for (char c = 0; c < R; c++) {
             if (x.next[c] != null) return x;
+        }
         return null;
     }
 
@@ -109,7 +109,15 @@ public class RWayTrie implements Trie {
 
     @Override
     public int size() {
-        return size;
+        return size(root);
     }
+    private int size(Node x)
+    {
+        if (x == null) return 0;
+        int cnt = 0;
+        if (x.val != null) cnt++;
+        for (char c = 0; c < R; c++)
+            cnt += size(x.next[c]);
+        return cnt; }
 
 }
