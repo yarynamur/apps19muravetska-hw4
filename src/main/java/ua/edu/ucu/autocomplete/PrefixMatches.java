@@ -36,23 +36,42 @@ public class PrefixMatches {
         return trie.delete(word);
     }
 
+
     public Iterable<String> wordsWithPrefix(String pref) {
+        if (pref.length()<2){
+            return null;
+        }
         return trie.wordsWithPrefix(pref);
     }
 
     public Iterable<String> wordsWithPrefix(String pref, int k) {
-        Iterable<String> old_q = trie.wordsWithPrefix(pref);
-        int new_size = Math.min(k, trie.size());
-        if (trie.size()>k){
-            new_size++;
+        if (pref.length()<2||k<0){
+            return null;
         }
+        Iterable<String> old_q = trie.wordsWithPrefix(pref);
         List<String> list = new ArrayList();
         for (String s: old_q) {
-            list.add(s);
+            if(s.length()>=pref.length()){
+                list.add(s);
+            }
         }
         Comparator c = (Comparator<String>) (s1, s2) -> Integer.compare(s1.length(), s2.length());
         Collections.sort(list, c);
-        return list.subList(0, new_size);
+        int i = 0;
+        int cur_len = 0;
+        List<String> out = new ArrayList();
+        for (String s : list) {
+            if (cur_len != s.length()) {
+                cur_len = s.length();
+                i++;
+                if (i == k + 1) {
+                    break;
+                }
+
+            }
+            out.add(s);
+        }
+        return out;
     }
 
     public int size() {
