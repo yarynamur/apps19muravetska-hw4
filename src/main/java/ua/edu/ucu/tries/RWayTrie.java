@@ -91,7 +91,7 @@ public class RWayTrie implements Trie {
 
     @Override
     public Iterable<String> wordsWithPrefix(String pref) {
-        Queue<String> q = new Queue();
+        Queue<String> q = new Queue<String>();
         collect(get(root, pref, 0), pref, q);
         return q;
     }
