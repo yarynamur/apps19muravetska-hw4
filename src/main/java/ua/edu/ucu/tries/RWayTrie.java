@@ -95,11 +95,11 @@ public class RWayTrie implements Trie {
         collect(get(root, pref, 0), pref, q);
         return q;
     }
-    private void collect(Node x, String pre, Queue q) {
+    private void collect(Node x, String pref, Queue q) {
         if (x == null) return;
-        if (x.val != null) q.enqueue(pre);
+        if (x.val != null) q.enqueue(pref);
         for (char c = 0; c < R; c++)
-            collect(x.next[c], pre + c, q);
+            collect(x.next[c], pref + c, q);
     }
 
     @Override
