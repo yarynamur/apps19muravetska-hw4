@@ -19,6 +19,10 @@ public class ImmutableLinkedList implements ImmutableList {
         }
     }
 
+    public Node getHead(){
+        return head;
+    }
+
     @Override
     public ImmutableLinkedList add(Object e) {
         return add(this.len, e);

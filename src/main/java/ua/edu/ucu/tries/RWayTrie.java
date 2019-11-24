@@ -91,14 +91,9 @@ public class RWayTrie implements Trie {
 
     @Override
     public Iterable<String> wordsWithPrefix(String pref) {
-        List<String> dict = new ArrayList<>();
-        Queue q = new Queue();
+        Queue<String> q = new Queue();
         collect(get(root, pref, 0), pref, q);
-        int size = q.size();
-        for (int i = 0; i < size;i++){
-            dict.add((String) q.dequeue());
-        }
-        return dict;
+        return q;
     }
     private void collect(Node x, String pre, Queue q) {
         if (x == null) return;
